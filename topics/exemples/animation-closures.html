@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation with callback</title>
+
+    <style>
+        #box1{
+            height: 30px;
+            width: 30px;
+            background: red ;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1"></div>
+
+    <script>
+
+        //el, tick e timer estão na closure do setInterval
+        //assim se houver mais de um elemento sendo animado este terá suas vars privadas via closure
+        //Closure == encapsulamento ativo do state no momento da criação que pode ser modificado
+        //enquanto a closure existir
+        //Closures estão intimamente relacionadas com scopes
+        function animateIt(elID){
+            var el = document.querySelector(elID);
+            var tick = 0;
+            var timer = setInterval(() => {
+                if(tick < 100){
+                    el.style.left = el.style.top = tick + "px";
+                    tick++;
+                }else{
+                    //Stop the timmer
+                    clearInterval(timer);
+                }
+            }, 10);
+        }
+
+        animateIt("#box1");
+
+    </script>
+</body>
+</html>
